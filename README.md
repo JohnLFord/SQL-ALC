@@ -1,43 +1,56 @@
-# SQLAlchemy Relational Database Assignment
+# SQLAlchemy Order Demo
 
-This project demonstrates how to build and manage a relational database using Python and SQLAlchemy with SQLite.
+This project is a small SQLAlchemy + SQLite demo that models users, products, and orders in a shop database.
 
-## What This Script Covers
+## What It Does
 
-- Setup SQLAlchemy engine, base, session
-- Define `User`, `Product`, and `Order` tables
-- Define relationships:
-  - One `User` to many `Order`
-  - One `Product` to many `Order`
-- Create tables
-- Insert sample data (2 users, 3 products, 4 orders)
-- Run CRUD-style operations:
-  - Read users/products/orders
-  - Update a product price
-  - Delete a user by ID
-- Bonus:
-  - `Order.status` (shipped or not)
-  - Query unshipped orders
-  - Count orders per user
+- Creates `users`, `products`, and `orders` tables with SQLAlchemy ORM
+- Defines one-to-many relationships from users to orders and products to orders
+- Seeds sample users, products, and orders
+- Prints all users, products, and orders
+- Updates the product price for `Mouse`
+- Demonstrates deleting a temporary user record
+- Shows unshipped orders
+- Counts total orders per user
 
-## Files
+## Notes About The Seed Data
 
-- `SQL-ALC.py` - main assignment script
-- `shop.db` - SQLite database file created and used by the script
+The script seeds orders idempotently. That means you can run it more than once without creating duplicate sample orders.
+
+Database files such as `shop.db` are ignored by git so local runs do not get committed.
+
+## Project Files
+
+- `SQL-ALC.py` - main application script
+- `requirements.txt` - Python dependencies
+- `push.ps1` - helper script for add/commit/push
 
 ## Setup
 
-1. Create/activate a virtual environment (optional but recommended).
-2. Install dependencies:
-
-```bash
-pip install SQLAlchemy
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
 
 ## Run
 
-```bash
-python SQL-ALC.py
+```powershell
+python .\SQL-ALC.py
 ```
 
-The script prints the results of all required queries and operations to the terminal.
+## Git Workflow
+
+For a normal push:
+
+```powershell
+.\push.ps1 "Describe your change"
+```
+
+That script runs:
+
+- `git add .`
+- `git commit -m "..."`
+- `git push`
+
+If there is nothing new to commit, git will tell you and no push will be created.
